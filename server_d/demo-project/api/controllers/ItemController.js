@@ -29,18 +29,23 @@ module.exports = {
             let listItems =await Item.find()
             // return res.json(req.body)
             return res.json(listItems)
-        }, editItem:async(req,res)=>{
+        },
+         editItem:async(req,res)=>{
             let {price}=req.body
             let {itemId}=req.params
           console.log("here in item")
           console.log(req.body)
-          let id=parseInt({itemId})
+          price=parseInt(price)
+          let id=parseInt(itemId)
+          console.log(req.params)
           // / let newPassword=await _.sails.helpers.passwords.hashPassword(password)
-            let newItem =await Item.find({id}).set({
-                price:price
-              }).fetch();
+           let updatedItem= await Item.updateOne({ id:id })
+           .set({
+             price
+           });
+           
             // return res.json(req.body)
-            return res.json(newItem)
+            return res.json(updatedItem)
             
             } 
         
